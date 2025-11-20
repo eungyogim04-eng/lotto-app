@@ -5,74 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>행운의 로또 번호 생성기</title>
     <style>
-        /* 웹사이트의 스타일(디자인)을 정의하는 CSS 영역입니다 */
         body {
-            font-family: 'Malgun Gothic', sans-serif;
-            background-color: #f0f9f4; /* 부드러운 초록색 배경 */
+            font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            background-color: #f0f2f5;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            height: 100vh;
+            align-items: center;
+            min-height: 100vh;
             margin: 0;
         }
         .container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 20px;
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 1rem;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             text-align: center;
+            max-width: 400px;
             width: 90%;
-            max-width: 500px;
         }
         h1 {
-            color: #2e7d32;
-            margin-bottom: 30px;
+            color: #2d3436;
+            margin-bottom: 1.5rem;
         }
         .numbers-container {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
             flex-wrap: wrap;
         }
         .ball {
-            width: 50px;
-            height: 50px;
-            background-color: #e0e0e0;
+            width: 40px;
+            height: 40px;
+            background-color: #dfe6e9;
             border-radius: 50%;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             font-weight: bold;
-            font-size: 20px;
-            color: #333;
-            transition: transform 0.2s;
+            color: #2d3436;
+            font-size: 1.1rem;
+            box-shadow: inset 0 -3px 5px rgba(0,0,0,0.1);
         }
-        /* 번호 대역별 색상 지정 */
-        .ball.y1-10 { background-color: #fbc400; color: white; }
-        .ball.y11-20 { background-color: #69c8f2; color: white; }
-        .ball.y21-30 { background-color: #ff7272; color: white; }
-        .ball.y31-40 { background-color: #aaaaaa; color: white; }
-        .ball.y41-45 { background-color: #b0d840; color: white; }
+        /* 공 색상 - 실제 로또 색상 적용 */
+        .ball.yellow { background-color: #fbc531; color: #fff; } /* 1-10 */
+        .ball.blue { background-color: #0984e3; color: #fff; }   /* 11-20 */
+        .ball.red { background-color: #e84118; color: #fff; }    /* 21-30 */
+        .ball.gray { background-color: #7f8c8d; color: #fff; }   /* 31-40 */
+        .ball.green { background-color: #4cd137; color: #fff; }  /* 41-45 */
 
-        button {
-            background-color: #2e7d32;
+        .generate-btn {
+            background-color: #6c5ce7;
             color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            border-radius: 50px;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            border-radius: 2rem;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: transform 0.1s, background-color 0.2s;
+            font-weight: bold;
         }
-        button:hover {
-            background-color: #1b5e20;
+        .generate-btn:hover {
+            background-color: #5f3dc4;
+        }
+        .generate-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* 후원 버튼 스타일 */
+        .coffee-btn {
+            background-color: #FFDD00;
+            color: #000000;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-family: sans-serif;
+            transition: transform 0.1s;
+        }
+        .coffee-btn:active {
+            transform: scale(0.98);
         }
     </style>
 </head>
 <body>
-
     <div class="container">
         <h1>🍀 행운의 로또 번호</h1>
         <div class="numbers-container" id="result">
@@ -83,62 +101,46 @@
             <div class="ball">?</div>
             <div class="ball">?</div>
         </div>
-        <button onclick="generateNumbers()">번호 생성하기</button>
+        <button class="generate-btn" onclick="generateNumbers()">번호 생성하기</button>
+
         <div style="margin-top: 30px;">
-    <a href="buymeacoffee.com/eungyo" target="_blank" style="text-decoration: none;">
-        <button style="background-color: #FFDD00; color: #000000; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            ☕ 개발자에게 커피 한 잔 후원하기
-        </button>
-    </a>
-    <p style="font-size: 12px; color: #666; margin-top: 10px;">
-        당첨되면 잊지 마세요! 😉
-    </p>
-</div>
-    </div>
+            <a href="https://www.buymeacoffee.com/eungyo" target="_blank" style="text-decoration: none;">
+                <button class="coffee-btn">
+                    ☕ 개발자에게 커피 한 잔 후원하기
+                </button>
+            </a>
+            <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                당첨되면 잊지 마세요! 😉
+            </p>
+        </div>
+        </div>
 
     <script>
-        // 웹사이트의 동작(로직)을 정의하는 JavaScript 영역입니다
-        
         function generateNumbers() {
-            // 1. 1부터 45까지의 숫자를 담은 배열 생성
-            const numbers = [];
-            for (let i = 1; i <= 45; i++) {
-                numbers.push(i);
+            const numbers = new Set();
+            while(numbers.size < 6) {
+                numbers.add(Math.floor(Math.random() * 45) + 1);
             }
+            
+            const sortedNumbers = Array.from(numbers).sort((a, b) => a - b);
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '';
 
-            // 2. 무작위로 섞어서 6개 뽑기 (피셔-예이츠 셔플 알고리즘의 단순화)
-            const result = [];
-            for (let i = 0; i < 6; i++) {
-                const randomIndex = Math.floor(Math.random() * numbers.length);
-                const selectedNumber = numbers.splice(randomIndex, 1)[0];
-                result.push(selectedNumber);
-            }
-
-            // 3. 보기 좋게 오름차순 정렬
-            result.sort((a, b) => a - b);
-
-            // 4. 화면에 표시하기
-            const container = document.getElementById('result');
-            container.innerHTML = ''; // 기존 번호 지우기
-
-            result.forEach(num => {
+            sortedNumbers.forEach(num => {
                 const ball = document.createElement('div');
-                ball.className = 'ball ' + getColorClass(num);
-                ball.innerText = num;
-                container.appendChild(ball);
+                ball.className = 'ball';
+                ball.textContent = num;
+                
+                // 번호별 색상 적용
+                if(num <= 10) ball.classList.add('yellow');
+                else if(num <= 20) ball.classList.add('blue');
+                else if(num <= 30) ball.classList.add('red');
+                else if(num <= 40) ball.classList.add('gray');
+                else ball.classList.add('green');
+                
+                resultDiv.appendChild(ball);
             });
-        }
-
-        // 번호에 따라 공의 색상을 결정하는 함수
-        function getColorClass(num) {
-            if (num <= 10) return 'y1-10';
-            else if (num <= 20) return 'y11-20';
-            else if (num <= 30) return 'y21-30';
-            else if (num <= 40) return 'y31-40';
-            else return 'y41-45';
         }
     </script>
 </body>
-
 </html>
-
