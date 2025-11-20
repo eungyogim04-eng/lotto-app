@@ -1,0 +1,12 @@
+{
+  "name": "simple-lotto-generator",
+  "version": "1.0.0",
+  "description": "Node.js로 구동되는 로또 번호 생성기",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
